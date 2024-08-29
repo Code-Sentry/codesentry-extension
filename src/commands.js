@@ -4,17 +4,24 @@ function registerCommands(context) {
     
     const startCommand = vscode.commands.registerCommand('codesentry.start', () => {
         vscode.window.showInformationMessage('CodeSentry Started!');
-        // Lógica adicional para o comando Start
         console.log("clicou no start");
-
-        const panel = vscode.window.createWebviewPanel(
-            "codesentry",
-            "Vulnerabilites",
-            vscode.ViewColumn.One
-        )
     });
 
-    context.subscriptions.push(startCommand);
+    const installCommand = vscode.commands.registerCommand('codesentry.install', () => {
+        vscode.window.showInformationMessage('CodeSentry Started!');
+        console.log("clicou no install");
+    });
+
+    const updateCommand = vscode.commands.registerCommand('codesentry.install', () => {
+        vscode.window.showInformationMessage('CodeSentry Started!');
+        console.log("clicou no update");
+    });
+
+    context.subscriptions.push(
+        startCommand,
+        updateCommand,
+        installCommand
+    );
 }
 
 module.exports = {

@@ -1,29 +1,26 @@
 const vscode = require('vscode');
+const { StartButtonItem, InstallButtonItem, UpdateButtonItem } = require('./ButtonItems');
+const {isCliToolInstalled} = require('../functions');
 
 class CodeSentryProvider {
     getTreeItem(element) {
         return element;
     }
 
-    getChildren(element) {
+    async getChildren(element) {
+        let items = [];
         if (!element) {
-            return [
-                new StartButtonItem()
-            ];
+            const isInstalled = await isCliToolInstalled();
+            if(!isInstalled){
+                items.push(new InstallButtonItem());
+            }
+
+            items.push(new StartButtonItem());
+            items.push(new UpdateButtonItem())
         }
-        return [];
+        return items;
     }
 }
 
-class StartButtonItem extends vscode.TreeItem {
-    constructor() {
-        super("Start", vscode.TreeItemCollapsibleState.None);
-        this.command = {
-            command: 'codesentry.start',
-            title: 'Start CodeSentry'
-        };
-        this.iconPath = new vscode.ThemeIcon('play');
-    }
-}
 
 module.exports = CodeSentryProvider;
