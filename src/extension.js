@@ -21,13 +21,14 @@ function deactivate() {}
 
 function isCliToolInstalled(){
     const commandSystem = "codesentry --version";
-    let isInstalled = false;
+    let isInstalled = true;
     
     exec(commandSystem, (error, stdout, stderr) => {
         const versionRegex = /\b\d+\.\d+\.\d+\b/g;
         const version = stdout.match(versionRegex);
 
         if(version == undefined){
+            isInstalled = false;
             vscode.window.showErrorMessage(`A ferramenta CLI não está instalada corretamente!`);
         }
     });
