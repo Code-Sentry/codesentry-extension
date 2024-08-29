@@ -27,14 +27,8 @@ function isCliToolInstalled(){
         const versionRegex = /\b\d+\.\d+\.\d+\b/g;
         const version = stdout.match(versionRegex);
 
-        if(version != undefined){
-            isInstalled = true;
-            
-            vscode.window.showErrorMessage(`A ferramenta CLI não está instalada corretamente!`, "Instalar").then(selection => {
-                if (selection === "Instalar") {
-                    vscode.env.openExternal(vscode.Uri.parse('https://github.com/KaioGerhardt/codesentry'));
-                }
-            });
+        if(version == undefined){
+            vscode.window.showErrorMessage(`A ferramenta CLI não está instalada corretamente!`);
         }
     });
 

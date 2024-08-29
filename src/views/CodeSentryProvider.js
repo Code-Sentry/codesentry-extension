@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 const { StartButtonItem, InstallButtonItem, UpdateButtonItem } = require('./ButtonItems');
-const {isCliToolInstalled} = require('../functions');
+const { isCliToolInstalled } = require('../functions');
 
 class CodeSentryProvider {
     getTreeItem(element) {
