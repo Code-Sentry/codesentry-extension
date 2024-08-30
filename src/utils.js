@@ -37,9 +37,36 @@ function installTool(vscodeDependency){
     });
 }
 
+async function getLatestVersion(vscodeDependency) {
+    const url = 'https://api.github.com/repos/Code-Sentry/codesentry/releases/latest';
+    try {
+        const response = await axios.get(url);
+        return response.data.tag_name; // Ex: 'v1.2.3'
+    } catch (error) {
+        vscodeDependency.window.showErrorMessage(`Erro ao obter a última versão: ${error}`);
+        return null;
+    }
+}
+
+function getVersionTool() {
+    return new Promise((resolve, reject) => {
+        exec("codesentry --version", (error, stdout, stderr) => {
+            const versionRegex = /\b\d+\.\d+\.\d+\b/g;
+            const version = stdout.match(versionRegex)[0];
+
+            if (version != undefined) {
+                resolve(version);
+            }else{
+                reject();
+            }
+        });
+    });
+}
 
 module.exports = {
     downloadTool,
     unzipFile,
-    installTool
+    installTool,
+    getLatestVersion,
+    getVersionTool
 }
