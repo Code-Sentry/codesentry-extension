@@ -26,6 +26,10 @@
         {
           "id": "codesentryView",
           "name": "Overview"
+        },
+        {
+          "id": "codesentrySettings",
+          "name": "Settings"
         }
       ]
     },
