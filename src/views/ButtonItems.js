@@ -31,8 +31,20 @@ class UpdateButtonItem extends ButtonItem {
     }
 }
 
+class AddProjectButtonItem extends ButtonItem {
+    constructor() {
+        super("Adicionar Projeto", vscode.TreeItemCollapsibleState.None);
+        this.command = {
+            command: 'codesentry.addProject',
+            title: 'Adicionar Projeto'
+        };
+        this.iconPath = new vscode.ThemeIcon('plus');
+    }
+}
+
 module.exports = {
     StartButtonItem,
     InstallButtonItem,
-    UpdateButtonItem
+    UpdateButtonItem,
+    AddProjectButtonItem
 };

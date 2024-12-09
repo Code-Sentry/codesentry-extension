@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 const CodeSentryProvider = require('./views/CodeSentryProvider');
-const CodeSentrySettingsProvider = require('./views/CodeSentrySettingsProvider');
+const CodeSentryProjectsProvider = require('./views/CodeSentryProjectsProvider');
 const { registerCommands } = require('./commands');
 const { exec } = require('child_process');
 
@@ -14,11 +14,12 @@ async function activate(context) {
     });
     context.subscriptions.push(view);
 
-    const settingsProvider = new CodeSentrySettingsProvider();
-    const settingsView = vscode.window.createTreeView('codesentryHistory', {
-        treeDataProvider: settingsProvider
+    // Registrar TreeView para Projects
+    const projectsProvider = new CodeSentryProjectsProvider(context);
+    const projectsView = vscode.window.createTreeView('codesentryProjects', {
+        treeDataProvider: projectsProvider
     });
-    context.subscriptions.push(settingsView);
+    context.subscriptions.push(projectsView);
 
     // Registrar Comandos
     registerCommands(context);

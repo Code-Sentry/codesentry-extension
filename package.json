@@ -28,8 +28,8 @@
           "name": "Overview"
         },
         {
-          "id": "codesentrySettings",
-          "name": "Settings"
+          "id": "codesentryProjects",
+          "name": "Projects"
         }
       ]
     },
@@ -37,6 +37,14 @@
       {
         "command": "codesentry.openView",
         "title": "Open CodeSentry View"
+      },
+      {
+        "command": "codesentry.addProject",
+        "title": "Add Project"
+      },
+      {
+          "command": "codesentry.selectProject",
+          "title": "Select Project"
       }
     ]
   },

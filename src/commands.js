@@ -20,10 +20,30 @@ function registerCommands(context) {
         console.log("clicou no update");
     });
 
+    const addProjectCommand = vscode.commands.registerCommand('codesentry.addProject', async () => {
+        const projectName = await vscode.window.showInputBox({ prompt: 'Insira o nome do Projeto' });
+        const urlScan = await vscode.window.showInputBox({ prompt: 'Informe o caminho do projeto' });
+        if (projectName) {
+            // Assuming you have a way to store projects, you can use a global state or a simple array
+            const projects = Array.isArray(context.globalState.get('projects')) ? context.globalState.get('projects') : [];
+            projects.push({ name: projectName, url: urlScan });
+            context.globalState.update('projects', projects);
+            vscode.window.showInformationMessage(`Projeto ${projectName} adicionado!`);
+            console.log('Project added!', projects);
+        }
+    });
+
+    const selectProjectCommand = vscode.commands.registerCommand('codesentry.selectProject', (project) => {
+        vscode.window.showInformationMessage(`Project ${project.name} selected!`);
+        // Logic to handle project selection
+    });
+
     context.subscriptions.push(
         startCommand,
         updateCommand,
-        installCommand
+        installCommand,
+        addProjectCommand,
+        selectProjectCommand
     );
 }
 
