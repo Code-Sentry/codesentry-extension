@@ -26,7 +26,15 @@ function registerCommands(context) {
         if (projectName) {
             // Assuming you have a way to store projects, you can use a global state or a simple array
             const projects = Array.isArray(context.globalState.get('projects')) ? context.globalState.get('projects') : [];
-            projects.push({ name: projectName, url: urlScan });
+            
+            projects.push({
+                name: projectName, 
+                url: urlScan, 
+                createdAt: new Date().toLocaleString(), 
+                status: 'Parado',
+                lastRun: null
+            });
+
             context.globalState.update('projects', projects);
             vscode.window.showInformationMessage(`Projeto ${projectName} adicionado!`);
             console.log('Project added!', projects);

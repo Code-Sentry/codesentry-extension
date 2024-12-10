@@ -2,9 +2,15 @@ const vscode = require('vscode');
 const { AddProjectButtonItem } = require('./ButtonItems');
 
 class ProjectItem extends vscode.TreeItem {
-    constructor(label, command) {
-        super(label, vscode.TreeItemCollapsibleState.None);
+    constructor(label, collapsibleState, command) {
+        super(label, collapsibleState);
         this.command = command;
+    }
+}
+
+class ProjectDetailItem extends vscode.TreeItem {
+    constructor(label) {
+        super(label, vscode.TreeItemCollapsibleState.None);
     }
 }
 
@@ -19,15 +25,22 @@ class CodeSentryProjectsProvider {
     }
 
     getChildren(element) {
-        console.log(this.projects);
         if (!element) {
-            let items = this.projects.map(project => new ProjectItem(project.name, {
+            let items = this.projects.map(project => new ProjectItem(project.name, vscode.TreeItemCollapsibleState.Collapsed, {
                 command: 'codesentry.selectProject',
                 title: 'Select Project',
                 arguments: [project]
             }));
             items.push(new AddProjectButtonItem());
             return items;
+        } else if (element instanceof ProjectItem) {
+            let project = this.projects.find(p => p.name === element.label);
+            return [
+                new ProjectDetailItem(`Url: ${project.url}`),
+                new ProjectDetailItem(`Criado: ${project.createdAt}`),
+                new ProjectDetailItem(`Executado: ${project.lastRun ? project.lastRun : 'Nunca'}`),
+                new ProjectDetailItem(`Status: ${project.status}`),
+            ];
         }
         return [];
     }
