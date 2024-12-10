@@ -1,10 +1,12 @@
 const vscode = require('vscode');
-const { AddProjectButtonItem } = require('./ButtonItems');
+const { AddProjectButtonItem, DeleteProjectButtonItem } = require('./ButtonItems');
 
 class ProjectItem extends vscode.TreeItem {
-    constructor(label, collapsibleState, command) {
+    constructor(label, collapsibleState, command, project) {
         super(label, collapsibleState);
         this.command = command;
+        this.contextValue = 'projectItem';
+        this.project = project;
     }
 }
 
@@ -40,6 +42,7 @@ class CodeSentryProjectsProvider {
                 new ProjectDetailItem(`Criado: ${project.createdAt}`),
                 new ProjectDetailItem(`Executado: ${project.lastRun ? project.lastRun : 'Nunca'}`),
                 new ProjectDetailItem(`Status: ${project.status}`),
+                new DeleteProjectButtonItem(project)
             ];
         }
         return [];

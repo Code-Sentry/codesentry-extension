@@ -46,12 +46,25 @@ function registerCommands(context) {
         // Logic to handle project selection
     });
 
+    const deleteProjectCommand = vscode.commands.registerCommand('codesentry.deleteProject', async (project) => {
+        const projects = Array.isArray(context.globalState.get('projects')) ? context.globalState.get('projects') : [];
+        const updatedProjects = projects.filter(p => p.name !== project.name);
+    
+        context.globalState.update('projects', updatedProjects);
+        vscode.window.showInformationMessage(`Projeto ${project.name} excluído!`);
+        console.log('Project deleted!', updatedProjects);
+    
+        // Refresh the tree view
+        vscode.commands.executeCommand('codesentry.refreshProjects');
+    });
+
     context.subscriptions.push(
         startCommand,
         updateCommand,
         installCommand,
         addProjectCommand,
-        selectProjectCommand
+        selectProjectCommand,
+        deleteProjectCommand
     );
 }
 

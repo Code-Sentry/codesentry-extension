@@ -42,9 +42,22 @@ class AddProjectButtonItem extends ButtonItem {
     }
 }
 
+class DeleteProjectButtonItem extends vscode.TreeItem {
+    constructor(project) {
+        super("Excluir Projeto", vscode.TreeItemCollapsibleState.None);
+        this.command = {
+            command: 'codesentry.deleteProject',
+            title: 'Excluir Projeto',
+            arguments: [project]
+        };
+        this.iconPath = new vscode.ThemeIcon('trash');
+    }
+}
+
 module.exports = {
     StartButtonItem,
     InstallButtonItem,
     UpdateButtonItem,
-    AddProjectButtonItem
+    AddProjectButtonItem,
+    DeleteProjectButtonItem
 };
