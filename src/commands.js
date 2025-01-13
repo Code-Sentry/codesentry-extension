@@ -38,6 +38,9 @@ function registerCommands(context) {
             context.globalState.update('projects', projects);
             vscode.window.showInformationMessage(`Projeto ${projectName} adicionado!`);
             console.log('Project added!', projects);
+
+            // Refresh the tree view
+            vscode.commands.executeCommand('codesentry.refreshProjects');
         }
     });
 
@@ -58,13 +61,19 @@ function registerCommands(context) {
         vscode.commands.executeCommand('codesentry.refreshProjects');
     });
 
+    const refreshProjectsCommand = vscode.commands.registerCommand('codesentry.refreshProjects', () => {
+        let _onDidChangeTreeData = new vscode.EventEmitter();
+        _onDidChangeTreeData.fire();
+    });
+
     context.subscriptions.push(
         startCommand,
         updateCommand,
         installCommand,
         addProjectCommand,
         selectProjectCommand,
-        deleteProjectCommand
+        deleteProjectCommand,
+        refreshProjectsCommand
     );
 }
 

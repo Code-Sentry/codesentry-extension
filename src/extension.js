@@ -21,6 +21,10 @@ async function activate(context) {
     });
     context.subscriptions.push(projectsView);
 
+    vscode.commands.registerCommand('codesentry.refreshProjects', () => {
+        projectsProvider.refresh();
+    });
+
     // Registrar Comandos
     registerCommands(context);
 }
