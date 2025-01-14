@@ -1,6 +1,7 @@
 const vscode = require('vscode');
-const CodeSentryProvider = require('./views/CodeSentryProvider');
+const CodeSentrySettingsProvider = require('./views/CodeSentrySettingsProvider');
 const CodeSentryProjectsProvider = require('./views/CodeSentryProjectsProvider');
+const CodeSentryReportsProvider = require('./views/CodeSentryReportsProvider');
 const { registerCommands } = require('./commands');
 const { exec } = require('child_process');
 
@@ -8,11 +9,11 @@ async function activate(context) {
 
     await isCliToolInstalled();
     // Registrar TreeView
-    const treeDataProvider = new CodeSentryProvider();
-    const view = vscode.window.createTreeView('codesentryView', {
-        treeDataProvider
+    const settingsProvider = new CodeSentrySettingsProvider();
+    const settingsView = vscode.window.createTreeView('codesentrySettings', {
+        treeDataProvider: settingsProvider
     });
-    context.subscriptions.push(view);
+    context.subscriptions.push(settingsView);
 
     // Registrar TreeView para Projects
     const projectsProvider = new CodeSentryProjectsProvider(context);
@@ -20,6 +21,13 @@ async function activate(context) {
         treeDataProvider: projectsProvider
     });
     context.subscriptions.push(projectsView);
+
+    // Registrar TreeView para Reports
+    const reportsProvider = new CodeSentryReportsProvider(context);
+    const reportsView = vscode.window.createTreeView('codesentryReports', {
+        treeDataProvider: reportsProvider
+    });
+    context.subscriptions.push(reportsView);
 
     vscode.commands.registerCommand('codesentry.refreshProjects', () => {
         projectsProvider.refresh();

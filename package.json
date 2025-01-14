@@ -24,12 +24,16 @@
     "views": {
       "codesentry": [
         {
-          "id": "codesentryView",
-          "name": "Overview"
+          "id": "codesentrySettings",
+          "name": "Configurações"
         },
         {
           "id": "codesentryProjects",
-          "name": "Projects"
+          "name": "Projetos"
+        },
+        {
+          "id": "codesentryReports",
+          "name": "Relatórios"
         }
       ]
     },
