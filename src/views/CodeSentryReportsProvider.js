@@ -63,12 +63,7 @@ class CodeSentryReportsProvider {
 
     getChildren(element) {
         if (!element) {
-            let items = this.reports.map(report => new ReportItem(report.name, vscode.TreeItemCollapsibleState.Collapsed, {
-                command: 'codesentry.selectProject',
-                title: 'Select Project',
-                arguments: [report]
-            }, report));
-            // items.push(new AddProjectButtonItem());
+            let items = this.reports.map(report => new ReportItem(report.name, vscode.TreeItemCollapsibleState.Collapsed, null, report));
             return items;
         } else if (element instanceof ReportItem) {
             let report = this.reports.find(r => r.name === element.label);
