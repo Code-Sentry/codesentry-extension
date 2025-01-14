@@ -66,6 +66,11 @@ function registerCommands(context) {
         _onDidChangeTreeData.fire();
     });
 
+    const startProjectCommand = vscode.commands.registerCommand('codesentry.startProjectItem', (project) => {
+        vscode.window.showInformationMessage(`Projeto ${project.name} iniciado!`);
+        // Lógica para iniciar o projeto
+    });
+
     context.subscriptions.push(
         startCommand,
         updateCommand,
@@ -73,7 +78,8 @@ function registerCommands(context) {
         addProjectCommand,
         selectProjectCommand,
         deleteProjectCommand,
-        refreshProjectsCommand
+        refreshProjectsCommand,
+        startProjectCommand
     );
 }
 

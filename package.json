@@ -49,8 +49,22 @@
       {
           "command": "codesentry.selectProject",
           "title": "Select Project"
+      },
+      {
+          "command": "codesentry.startProjectItem",
+          "title": "Iniciar Varredura"
       }
-    ]
+    ],
+    "menus": {
+      "view/item/context": [
+            {
+              "command": "codesentry.startProjectItem",
+              "when": "viewItem == projectItem",
+              "group": "inline",
+                "icon": "$(play)"
+            }
+      ]
+  }
   },
   "scripts": {
     "lint": "eslint .",

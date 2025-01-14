@@ -7,6 +7,24 @@ class ProjectItem extends vscode.TreeItem {
         this.command = command;
         this.contextValue = 'projectItem';
         this.project = project;
+        this.iconPath = new vscode.ThemeIcon('folder');
+        this.tooltip = `${this.label} - Clique em iniciar varredura!`;
+        this.description = project.status;
+
+        this.buttons = [
+            {
+                // command: 'codesentry.startProject',
+                title: 'Start Project',
+                iconPath: new vscode.ThemeIcon('play')
+            }
+        ];
+
+
+        // this.command = {
+        //     command: 'codesentry.deleteProjectCommand',
+        //     title: 'Start Project',
+        //     arguments: [project]
+        // };
     }
 }
 
@@ -32,7 +50,7 @@ class CodeSentryProjectsProvider {
                 command: 'codesentry.selectProject',
                 title: 'Select Project',
                 arguments: [project]
-            }));
+            }, project));
             items.push(new AddProjectButtonItem());
             return items;
         } else if (element instanceof ProjectItem) {
