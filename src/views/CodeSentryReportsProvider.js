@@ -1,16 +1,18 @@
 const vscode = require('vscode');
 
 class ReportItem extends vscode.TreeItem {
-    constructor(label, collapsibleState, command, project) {
+    constructor(label, collapsibleState, command, report) {
         super(label, collapsibleState);
         this.command = command;
         this.contextValue = 'reportItem';
-        this.project = project;
+        this.report = report;
         this.iconPath = new vscode.ThemeIcon('file');
-        this.tooltip = `${this.label} - Clique em iniciar varredura!`;
-        this.description = project.status;
+        this.tooltip = `${this.label} - Clique para abrir o relatório!`;
+        this.description = report.status;
+    }
 
-
+    getFilePath() {
+        return this.report.file;
     }
 }
 
@@ -34,7 +36,7 @@ class CodeSentryReportsProvider {
             project: 'Project 1',
             lastRun: '2023-01-10',
             status: 'Completed',
-            file: 'C:/Users/Kaio/Downloads/Language%20to%20Go.pdf'
+            file: 'C:/Users/Kaio/Downloads/314756179-English-Unlimited-a2-Elementary-Coursebook-697729.pdf'
         },
         {
             name: 'Report 2',
@@ -61,11 +63,11 @@ class CodeSentryReportsProvider {
 
     getChildren(element) {
         if (!element) {
-            let items = this.reports.map(project => new ReportItem(project.name, vscode.TreeItemCollapsibleState.Collapsed, {
+            let items = this.reports.map(report => new ReportItem(report.name, vscode.TreeItemCollapsibleState.Collapsed, {
                 command: 'codesentry.selectProject',
                 title: 'Select Project',
-                arguments: [project]
-            }, project));
+                arguments: [report]
+            }, report));
             // items.push(new AddProjectButtonItem());
             return items;
         } else if (element instanceof ReportItem) {

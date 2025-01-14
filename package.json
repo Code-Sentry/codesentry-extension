@@ -53,6 +53,10 @@
       {
           "command": "codesentry.startProjectItem",
           "title": "Iniciar Varredura"
+      },
+      {
+          "command": "codesentry.openLocalPDF",
+          "title": "Abrir relatório"
       }
     ],
     "menus": {
@@ -62,6 +66,12 @@
               "when": "viewItem == projectItem",
               "group": "inline",
                 "icon": "$(play)"
+            },
+            {
+              "command": "codesentry.openLocalPDF",
+              "when": "viewItem == reportItem",
+              "group": "inline",
+              "icon": "$(file-pdf)"
             }
       ]
   }

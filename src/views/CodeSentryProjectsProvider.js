@@ -26,6 +26,10 @@ class ProjectItem extends vscode.TreeItem {
         //     arguments: [project]
         // };
     }
+
+    getProjectName() {
+        return this.project.name;
+    }
 }
 
 class ProjectDetailItem extends vscode.TreeItem {

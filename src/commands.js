@@ -1,5 +1,7 @@
 const vscode = require('vscode');
 const { downloadAndInstallToolCLI, updateToolCLI } = require('./functions');
+const path = require('path');
+const { Uri } = require('vscode');
 
 function registerCommands(context) {
     
@@ -67,8 +69,14 @@ function registerCommands(context) {
     });
 
     const startProjectCommand = vscode.commands.registerCommand('codesentry.startProjectItem', (project) => {
-        vscode.window.showInformationMessage(`Projeto ${project.name} iniciado!`);
+        let projectName = project.getProjectName();
+        vscode.window.showInformationMessage(`Projeto ${projectName} iniciado!`);
         // Lógica para iniciar o projeto
+    });
+
+    let openPDF = vscode.commands.registerCommand('codesentry.openLocalPDF', function (filePath) {
+        let uri = Uri.file(filePath.getFilePath());
+        vscode.env.openExternal(uri);
     });
 
     context.subscriptions.push(
@@ -79,7 +87,8 @@ function registerCommands(context) {
         selectProjectCommand,
         deleteProjectCommand,
         refreshProjectsCommand,
-        startProjectCommand
+        startProjectCommand,
+        openPDF
     );
 }
 
