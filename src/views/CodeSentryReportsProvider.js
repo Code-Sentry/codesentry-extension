@@ -1,4 +1,6 @@
 const vscode = require('vscode');
+const { GlobalStateWatcher } = require('../GlobalStateWatcher ');
+const { watcherReportFiles } = require('../utils');
 
 class ReportItem extends vscode.TreeItem {
     constructor(label, collapsibleState, command, report) {
@@ -26,35 +28,33 @@ class CodeSentryReportsProvider {
 
     constructor(context) {
         this.context = context;
-        // this.reports = Array.isArray(this.context.globalState.get('reports')) ? this.context.globalState.get('reports') : [];
+
+        this._onDidChangeTreeData = new vscode.EventEmitter();
+        this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+
+        this.reports = [];
+        const stateWatcher = new GlobalStateWatcher(context.globalState);
+
+        watcherReportFiles(this.context, stateWatcher);
+
+        const readReports = () => {
+            const reports = Array.isArray(stateWatcher.get('reports'))
+              ? stateWatcher.get('reports')
+              : [];
+
+            this.reports = reports;
+            console.log('Reports atualizados:', this.reports);
+
+            this._onDidChangeTreeData.fire();
+        };
         
-        // Example reports for development
-        this.reports = [
-        {
-            name: 'Report 1',
-            path: '/localhost/test/1',
-            project: 'Project 1',
-            lastRun: '2023-01-10',
-            status: 'Completed',
-            file: 'C:/Users/Kaio/Downloads/314756179-English-Unlimited-a2-Elementary-Coursebook-697729.pdf'
-        },
-        {
-            name: 'Report 2',
-            path: 'http://example.com/project2',
-            project: 'Project 2',
-            lastRun: null,
-            status: 'Pending',
-            file: 'C:/Users/Kaio/Downloads/Language%20to%20Go.pdf'
-        },
-        {
-            name: 'Report 3',
-            path: 'http://example.com/project3',
-            project: 'Project 3',
-            lastRun: '2023-03-05',
-            status: 'In Progress',
-            file: 'C:/Users/Kaio/Downloads/Language%20to%20Go.pdf'
-        }
-        ];
+        readReports();
+
+        stateWatcher.on('change', ({ key }) => {
+            if (key === 'reports') {
+              readReports();
+            }
+        });
     }
 
     getTreeItem(element) {

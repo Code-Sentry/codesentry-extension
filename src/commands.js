@@ -68,10 +68,13 @@ function registerCommands(context) {
         _onDidChangeTreeData.fire();
     });
 
-    const startProjectCommand = vscode.commands.registerCommand('codesentry.startProjectItem', (project) => {
+    const startProjectCommand = vscode.commands.registerCommand('codesentry.startScan', (project) => {
         let projectName = project.getProjectName();
         vscode.window.showInformationMessage(`Projeto ${projectName} iniciado!`);
-        // Lógica para iniciar o projeto
+
+        const terminal = vscode.window.createTerminal(`CodeSentry: ${projectName}`);
+        terminal.sendText(`codesentry --scan full --directory C:\\Projects\\codesentry\\test`);
+        terminal.show();
     });
 
     let openPDF = vscode.commands.registerCommand('codesentry.openLocalPDF', function (filePath) {

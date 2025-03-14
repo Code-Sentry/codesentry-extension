@@ -17,7 +17,7 @@
         {
           "id": "codesentry",
           "title": "CodeSentry",
-          "icon": "resources/codesentry-icon.svg"
+          "icon": "resources/icon.svg"
         }
       ]
     },
@@ -51,7 +51,7 @@
           "title": "Select Project"
       },
       {
-          "command": "codesentry.startProjectItem",
+          "command": "codesentry.startScan",
           "title": "Iniciar Varredura"
       },
       {
@@ -62,7 +62,7 @@
     "menus": {
       "view/item/context": [
             {
-              "command": "codesentry.startProjectItem",
+              "command": "codesentry.startScan",
               "when": "viewItem == projectItem",
               "group": "inline",
                 "icon": "$(play)"

@@ -4,6 +4,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 const AdmZip = require('adm-zip');
+const { GlobalStateWatcher } = require('./GlobalStateWatcher ');
 
 const urlRepository = 'https://github.com/Code-Sentry/codesentry/archive/refs/heads/main.zip';
 const dirDocumentsUser = path.join(os.homedir(), 'Documents');
@@ -63,10 +64,38 @@ function getVersionTool() {
     });
 }
 
+function watcherReportFiles(vscodeContext, stateWatcher){
+    const reportFilePath = path.join(dirDocumentsUser, 'reports.json');
+
+    if (!fs.existsSync(reportFilePath)) {
+        fs.writeFileSync(reportFilePath, JSON.stringify([]));
+    }
+
+    const watcher = fs.watch(reportFilePath, (eventType, filename) => {
+        if (filename) {
+            if(eventType === 'change'){
+                readAndLoadReports(reportFilePath, vscodeContext, stateWatcher);
+            }
+        }
+    });
+
+    return watcher;
+}
+
+function readAndLoadReports(reportFilePath, vscodeContext, stateWatcher){
+    const reports = JSON.parse(fs.readFileSync(reportFilePath, 'utf8'));
+
+    console.log("Reports antes de ser salvos:", reports);
+    stateWatcher.update('reports', reports)
+        .then(() => console.log('Global state atualizado via stateWatcher'))
+        .catch(err => console.error('Erro ao atualizar:', err));
+}
+
 module.exports = {
     downloadTool,
     unzipFile,
     installTool,
     getLatestVersion,
-    getVersionTool
-}
+    getVersionTool,
+    watcherReportFiles
+};
