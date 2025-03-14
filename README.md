@@ -1,65 +1,31 @@
-# extension README
+# CodeSentry
 
-This is the README for your extension "extension". After writing up a brief description, we recommend including the following sections.
+[![Versão](https://img.shields.io/visual-studio-marketplace/v/seu-publisher.nome-da-extensao.svg)](https://marketplace.visualstudio.com/items?itemName=seu-publisher.nome-da-extensao)
+[![Downloads](https://img.shields.io/visual-studio-marketplace/d/seu-publisher.nome-da-extensao.svg)](https://marketplace.visualstudio.com/items?itemName=seu-publisher.nome-da-extensao)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/seu-publisher.nome-da-extensao.svg)](https://marketplace.visualstudio.com/items?itemName=seu-publisher.nome-da-extensao)
 
-## Features
+Uma breve descrição sobre o que sua extensão faz. Por exemplo:
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+> Esta extensão fornece ferramentas avançadas para monitoramento e gerenciamento de relatórios, facilitando a visualização e interação com os dados no VS Code.
 
-For example if there is an image subfolder under your extension project workspace:
+## Funcionalidades
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Monitoramento em Tempo Real:** Acompanhe alterações e atualize visualizações automaticamente.
+- **Visualização de Relatórios:** Navegue facilmente pelos relatórios e visualize detalhes.
+- **Integração com o Global State:** Gerencie dados persistentes da sua extensão de forma simples.
+- **Outras Funcionalidades:** Adicione aqui qualquer outra funcionalidade importante da sua extensão.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Instalação
 
-## Requirements
+### Via VS Code Marketplace
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+1. Abra o Visual Studio Code.
+2. Vá para a aba de Extensões (`Ctrl+Shift+X` ou `Cmd+Shift+X` no macOS).
+3. Pesquise por `Nome da Extensão` e clique em instalar.
 
-## Extension Settings
+### Instalação Manual
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+1. Clone ou faça o download deste repositório.
+2. Na raiz do projeto, execute o comando:
+   ```bash
+   npm install
