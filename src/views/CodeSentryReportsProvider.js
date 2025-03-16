@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const { GlobalStateWatcher } = require('../GlobalStateWatcher');
+const { getGlobalStateWatcher  } = require('../globalStateSingleton');
 const { watcherReportFiles } = require('../utils');
 
 class ReportItem extends vscode.TreeItem {
@@ -33,7 +33,7 @@ class CodeSentryReportsProvider {
         this.onDidChangeTreeData = this._onDidChangeTreeData.event;
 
         this.reports = [];
-        const stateWatcher = new GlobalStateWatcher(context.globalState);
+        const stateWatcher = getGlobalStateWatcher();
 
         watcherReportFiles(this.context, stateWatcher);
 

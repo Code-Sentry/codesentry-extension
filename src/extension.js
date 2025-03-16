@@ -4,8 +4,13 @@ const CodeSentryProjectsProvider = require('./views/CodeSentryProjectsProvider')
 const CodeSentryReportsProvider = require('./views/CodeSentryReportsProvider');
 const { registerCommands } = require('./commands');
 const { exec } = require('child_process');
+const { GlobalStateWatcher } = require('./GlobalStateWatcher');
+const { setGlobalStateWatcher } = require('./globalStateSingleton');
 
 async function activate(context) {
+    
+    const globalStateWatcher = new GlobalStateWatcher(context.globalState);
+    setGlobalStateWatcher(globalStateWatcher);
 
     await isCliToolInstalled();
     // Registrar TreeView
