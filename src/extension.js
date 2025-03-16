@@ -34,17 +34,6 @@ async function activate(context) {
     });
     context.subscriptions.push(reportsView);
 
-    // inicio da gambiarra para o refresh funcionar
-    const commands = await vscode.commands.getCommands();
-    console.log(commands.includes('codesentry.refreshProjects'));
-    if (false) {
-    // if (!commands.includes('codesentry.refreshProjects')) {
-        vscode.commands.registerCommand('codesentry.refreshProjects', () => {
-            projectsProvider.refresh();
-        });
-    }
-    // fim da gambiarra
-
     // Registrar Comandos
     registerCommands(context);
 }
