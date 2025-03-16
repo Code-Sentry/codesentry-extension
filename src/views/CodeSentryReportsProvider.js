@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const { GlobalStateWatcher } = require('../GlobalStateWatcher ');
+const { GlobalStateWatcher } = require('../GlobalStateWatcher');
 const { watcherReportFiles } = require('../utils');
 
 class ReportItem extends vscode.TreeItem {

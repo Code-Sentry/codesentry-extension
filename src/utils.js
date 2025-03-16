@@ -4,7 +4,6 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 const AdmZip = require('adm-zip');
-const { GlobalStateWatcher } = require('./GlobalStateWatcher ');
 
 const urlRepository = 'https://github.com/Code-Sentry/codesentry/archive/refs/heads/main.zip';
 const dirDocumentsUser = path.join(os.homedir(), 'Documents');
