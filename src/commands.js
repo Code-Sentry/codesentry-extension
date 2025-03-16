@@ -2,6 +2,7 @@ const vscode = require('vscode');
 const { downloadAndInstallToolCLI, updateToolCLI } = require('./functions');
 const path = require('path');
 const { Uri } = require('vscode');
+const { getGlobalStateWatcher } = require('./globalStateSingleton');
 
 function registerCommands(context) {
     
@@ -27,7 +28,8 @@ function registerCommands(context) {
         const urlScan = await vscode.window.showInputBox({ prompt: 'Informe o caminho do projeto' });
         if (projectName) {
             // Assuming you have a way to store projects, you can use a global state or a simple array
-            const projects = Array.isArray(context.globalState.get('projects')) ? context.globalState.get('projects') : [];
+            const globalStateWatcher = getGlobalStateWatcher();
+            const projects = Array.isArray(globalStateWatcher.get('projects')) ? globalStateWatcher.get('projects') : [];;
             
             projects.push({
                 name: projectName, 
@@ -37,7 +39,9 @@ function registerCommands(context) {
                 lastRun: null
             });
 
-            context.globalState.update('projects', projects);
+            globalStateWatcher.update('projects', projects);
+
+            // context.globalState.update('projects', projects);
             vscode.window.showInformationMessage(`Projeto ${projectName} adicionado!`);
             console.log('Project added!', projects);
 

@@ -90,11 +90,39 @@ function readAndLoadReports(reportFilePath, vscodeContext, stateWatcher){
         .catch(err => console.error('Erro ao atualizar:', err));
 }
 
+function watcherProjectsFiles(vscodeContext, stateWatcher){
+    const projectsFilePath = path.join(dirDocumentsUser, 'projects.json');
+
+    if (!fs.existsSync(projectsFilePath)) {
+        fs.writeFileSync(projectsFilePath, JSON.stringify([]));
+    }
+
+    const watcher = fs.watch(projectsFilePath, (eventType, filename) => {
+        if (filename) {
+            if(eventType === 'change'){
+                readAndLoadProjects(projectsFilePath, stateWatcher);
+            }
+        }
+    });
+
+    return watcher;
+}
+
+function readAndLoadProjects(projectsFilePath, stateWatcher){
+    const projects = JSON.parse(fs.readFileSync(projectsFilePath, 'utf8'));
+
+    console.log("Projects antes de ser salvos:", projects);
+    stateWatcher.update('projects', projects)
+        .then(() => console.log('Global state atualizado via stateWatcher'))
+        .catch(err => console.error('Erro ao atualizar:', err));
+}
+
 module.exports = {
     downloadTool,
     unzipFile,
     installTool,
     getLatestVersion,
     getVersionTool,
-    watcherReportFiles
+    watcherReportFiles,
+    watcherProjectsFiles
 };

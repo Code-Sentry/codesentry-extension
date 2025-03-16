@@ -1,5 +1,7 @@
 const vscode = require('vscode');
 const { AddProjectButtonItem, DeleteProjectButtonItem } = require('./ButtonItems');
+const { watcherProjectsFiles } = require('../utils');
+const { getGlobalStateWatcher  } = require('../globalStateSingleton');
 
 class ProjectItem extends vscode.TreeItem {
     constructor(label, collapsibleState, command, project) {
@@ -19,6 +21,7 @@ class ProjectItem extends vscode.TreeItem {
             }
         ];
 
+       
 
         // this.command = {
         //     command: 'codesentry.deleteProjectCommand',
@@ -41,7 +44,30 @@ class ProjectDetailItem extends vscode.TreeItem {
 class CodeSentryProjectsProvider {
     constructor(context) {
         this.context = context;
-        this.projects = Array.isArray(this.context.globalState.get('projects')) ? this.context.globalState.get('projects') : [];
+
+        this._onDidChangeTreeData = new vscode.EventEmitter();
+        this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+
+        const stateWatcher = getGlobalStateWatcher();
+        watcherProjectsFiles(this.context, stateWatcher);
+        // this.projects = Array.isArray(this.context.globalState.get('projects')) ? this.context.globalState.get('projects') : [];
+
+        const readProjects = () => {
+            const projects = Array.isArray(stateWatcher.get('projects')) ? stateWatcher.get('projects') : [];
+
+            this.projects = projects;
+            console.log('Projects atualizados:', this.projects);
+
+            this._onDidChangeTreeData.fire();
+        };
+        
+        readProjects();
+
+        stateWatcher.on('change', ({ key }) => {
+            if (key === 'projects') {
+                readProjects();
+            }
+        });
     }
 
     getTreeItem(element) {
