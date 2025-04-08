@@ -117,6 +117,14 @@ function readAndLoadProjects(projectsFilePath, stateWatcher){
         .catch(err => console.error('Erro ao atualizar:', err));
 }
 
+function updateDataFileProjects(projects){
+    fs.writeFileSync(
+        path.join(dirDocumentsUser, 'projects.json'),
+        JSON.stringify(projects, null, 2),
+        'utf8'
+    );
+}
+
 module.exports = {
     downloadTool,
     unzipFile,
@@ -124,5 +132,7 @@ module.exports = {
     getLatestVersion,
     getVersionTool,
     watcherReportFiles,
-    watcherProjectsFiles
+    watcherProjectsFiles,
+    updateDataFileProjects
+    
 };

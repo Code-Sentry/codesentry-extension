@@ -3,6 +3,7 @@ const { downloadAndInstallToolCLI, updateToolCLI } = require('./functions');
 const path = require('path');
 const { Uri } = require('vscode');
 const { getGlobalStateWatcher } = require('./globalStateSingleton');
+const { updateDataFileProjects } = require('./utils');
 
 function registerCommands(context) {
     
@@ -40,6 +41,7 @@ function registerCommands(context) {
             });
 
             globalStateWatcher.update('projects', projects);
+            updateDataFileProjects(projects);
 
             // context.globalState.update('projects', projects);
             vscode.window.showInformationMessage(`Projeto ${projectName} adicionado!`);
