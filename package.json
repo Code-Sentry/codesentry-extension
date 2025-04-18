@@ -2,7 +2,7 @@
   "name": "CodeSentry",
   "displayName": "CodeSentry",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "KaioGerhardt",
   "engines": {
     "vscode": "^1.92.0"
@@ -18,7 +18,7 @@
         {
           "id": "codesentry",
           "title": "CodeSentry",
-          "icon": "resources/icon.svg"
+          "icon": "images/icon.svg"
         }
       ]
     },
