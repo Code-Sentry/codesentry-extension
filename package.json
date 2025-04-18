@@ -2,7 +2,7 @@
   "name": "CodeSentry",
   "displayName": "CodeSentry",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "KaioGerhardt",
   "engines": {
     "vscode": "^1.92.0"
@@ -48,34 +48,34 @@
         "title": "Add Project"
       },
       {
-          "command": "codesentry.selectProject",
-          "title": "Select Project"
+        "command": "codesentry.selectProject",
+        "title": "Select Project"
       },
       {
-          "command": "codesentry.startScan",
-          "title": "Iniciar Varredura"
+        "command": "codesentry.startScan",
+        "title": "Iniciar Varredura"
       },
       {
-          "command": "codesentry.openLocalPDF",
-          "title": "Abrir relatório"
+        "command": "codesentry.openLocalPDF",
+        "title": "Abrir relatório"
       }
     ],
     "menus": {
       "view/item/context": [
-            {
-              "command": "codesentry.startScan",
-              "when": "viewItem == projectItem",
-              "group": "inline",
-                "icon": "$(play)"
-            },
-            {
-              "command": "codesentry.openLocalPDF",
-              "when": "viewItem == reportItem",
-              "group": "inline",
-              "icon": "$(file-pdf)"
-            }
+        {
+          "command": "codesentry.startScan",
+          "when": "viewItem == projectItem",
+          "group": "inline",
+          "icon": "$(play)"
+        },
+        {
+          "command": "codesentry.openLocalPDF",
+          "when": "viewItem == reportItem",
+          "group": "inline",
+          "icon": "$(file-pdf)"
+        }
       ]
-  }
+    }
   },
   "scripts": {
     "lint": "eslint .",
