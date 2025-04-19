@@ -56,7 +56,6 @@ class CodeSentryProjectsProvider {
             const projects = Array.isArray(stateWatcher.get('projects')) ? stateWatcher.get('projects') : [];
 
             this.projects = projects;
-            console.log('Projects atualizados:', this.projects);
 
             this._onDidChangeTreeData.fire();
         };

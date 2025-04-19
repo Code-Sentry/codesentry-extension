@@ -43,7 +43,6 @@ class CodeSentryReportsProvider {
               : [];
 
             this.reports = reports;
-            console.log('Reports atualizados:', this.reports);
 
             this._onDidChangeTreeData.fire();
         };

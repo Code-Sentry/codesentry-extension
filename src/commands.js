@@ -9,19 +9,16 @@ function registerCommands(context) {
     
     const startCommand = vscode.commands.registerCommand('codesentry.start', () => {
         vscode.window.showInformationMessage('CodeSentry iniciado!');
-        console.log("clicou no start");
     });
 
     const installCommand = vscode.commands.registerCommand('codesentry.install', () => {
         vscode.window.showInformationMessage('CodeSentry instalando...');
         downloadAndInstallToolCLI()
-        console.log("clicou no install");
     });
 
     const updateCommand = vscode.commands.registerCommand('codesentry.update', () => {
         vscode.window.showInformationMessage('CodeSentry atualizando...');
         updateToolCLI()
-        console.log("clicou no update");
     });
 
     const addProjectCommand = vscode.commands.registerCommand('codesentry.addProject', async () => {
@@ -45,7 +42,6 @@ function registerCommands(context) {
 
             // context.globalState.update('projects', projects);
             vscode.window.showInformationMessage(`Projeto ${projectName} adicionado!`);
-            console.log('Project added!', projects);
         }
     });
 
@@ -61,7 +57,6 @@ function registerCommands(context) {
     
         globalStateWatcher.update('projects', updatedProjects);
         vscode.window.showInformationMessage(`Projeto ${project.name} excluído!`);
-        console.log('Project deleted!', updatedProjects);
     });
 
     const startProjectCommand = vscode.commands.registerCommand('codesentry.startScan', (project) => {

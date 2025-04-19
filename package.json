@@ -2,10 +2,14 @@
   "name": "CodeSentry",
   "displayName": "CodeSentry",
   "description": "",
-  "version": "0.0.4",
+  "version": "0.0.3",
   "publisher": "KaioGerhardt",
   "engines": {
     "vscode": "^1.92.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuário/codesentry-extension.git"
   },
   "categories": [
     "Other"
