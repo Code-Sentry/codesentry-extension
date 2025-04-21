@@ -61,10 +61,11 @@ function registerCommands(context) {
 
     const startProjectCommand = vscode.commands.registerCommand('codesentry.startScan', (project) => {
         let projectName = project.getProjectName();
+        let projectUrl = project.getProjectUrl().replace(/\\/g, '\\\\');
         vscode.window.showInformationMessage(`Projeto ${projectName} iniciado!`);
 
         const terminal = vscode.window.createTerminal(`CodeSentry: ${projectName}`);
-        terminal.sendText(`codesentry --scan full --directory C:\\Projects\\codesentry\\test`);
+        terminal.sendText(`codesentry --scan full --directory ${projectUrl}`);
         terminal.show();
     });
 

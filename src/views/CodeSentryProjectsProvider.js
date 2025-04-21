@@ -33,6 +33,10 @@ class ProjectItem extends vscode.TreeItem {
     getProjectName() {
         return this.project.name;
     }
+
+    getProjectUrl() {
+        return this.project.url;
+    }
 }
 
 class ProjectDetailItem extends vscode.TreeItem {

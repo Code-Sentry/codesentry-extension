@@ -84,7 +84,6 @@ function watcherReportFiles(vscodeContext, stateWatcher){
 function readAndLoadReports(reportFilePath, vscodeContext, stateWatcher){
     const reports = JSON.parse(fs.readFileSync(reportFilePath, 'utf8'));
 
-    console.log("Reports antes de ser salvos:", reports);
     stateWatcher.update('reports', reports)
         .then(() => console.log('Global state atualizado via stateWatcher'))
         .catch(err => console.error('Erro ao atualizar:', err));
@@ -111,7 +110,6 @@ function watcherProjectsFiles(vscodeContext, stateWatcher){
 function readAndLoadProjects(projectsFilePath, stateWatcher){
     const projects = JSON.parse(fs.readFileSync(projectsFilePath, 'utf8'));
 
-    console.log("Projects antes de ser salvos:", projects);
     stateWatcher.update('projects', projects)
         .then(() => console.log('Global state atualizado via stateWatcher'))
         .catch(err => console.error('Erro ao atualizar:', err));
