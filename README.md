@@ -1,31 +1,34 @@
 # CodeSentry
 
-[![Versão](https://img.shields.io/visual-studio-marketplace/v/seu-publisher.nome-da-extensao.svg)](https://marketplace.visualstudio.com/items?itemName=seu-publisher.nome-da-extensao)
-[![Downloads](https://img.shields.io/visual-studio-marketplace/d/seu-publisher.nome-da-extensao.svg)](https://marketplace.visualstudio.com/items?itemName=seu-publisher.nome-da-extensao)
-[![Rating](https://img.shields.io/visual-studio-marketplace/r/seu-publisher.nome-da-extensao.svg)](https://marketplace.visualstudio.com/items?itemName=seu-publisher.nome-da-extensao)
+[![Versão](https://img.shields.io/visual-studio-marketplace/v/kaiogerhardt.codesentry.svg)](https://marketplace.visualstudio.com/items?itemName=kaiogerhardt.codesentry)
+[![Downloads](https://img.shields.io/visual-studio-marketplace/d/kaiogerhardt.codesentry.svg)](https://marketplace.visualstudio.com/items?itemName=kaiogerhardt.codesentry)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/kaiogerhardt.codesentry.svg)](https://marketplace.visualstudio.com/items?itemName=kaiogerhardt.codesentry)
 
-Uma breve descrição sobre o que sua extensão faz. Por exemplo:
-
-> Esta extensão fornece ferramentas avançadas para monitoramento e gerenciamento de relatórios, facilitando a visualização e interação com os dados no VS Code.
+**CodeSentry** é uma extensão SAST (Static Application Security Testing) para o Visual Studio Code que ajuda desenvolvedores a identificar vulnerabilidades de segurança em tempo real, sem sair do editor.
 
 ## Funcionalidades
 
-- **Monitoramento em Tempo Real:** Acompanhe alterações e atualize visualizações automaticamente.
-- **Visualização de Relatórios:** Navegue facilmente pelos relatórios e visualize detalhes.
-- **Integração com o Global State:** Gerencie dados persistentes da sua extensão de forma simples.
-- **Outras Funcionalidades:** Adicione aqui qualquer outra funcionalidade importante da sua extensão.
+- **Varredura em Tempo Real**  
+  Detecta instantaneamente padrões de vulnerabilidade (SQL Injection, XSS, SSRF, etc.) enquanto você digita.  
+- **Integração com CLI CodeSentry**  
+  Gerencia todo o processo de análise via linha de comando, gerando relatórios PDF padronizados.  
+- **Painel de Projetos**  
+  Cadastre múltiplos diretórios ou repositórios e execute scans com um clique.  
+- **Relatórios Detalhados**  
+  Visualize e abra relatórios em PDF diretamente no VS Code, com localização de falhas, contexto e sugestões de correção.  
+- **“Shift Left Security”**  
+  Antecipe a detecção de vulnerabilidades nas fases iniciais do desenvolvimento, reduzindo retrabalho e custos.
 
 ## Instalação
 
-### Via VS Code Marketplace
+1. Abra o VS Code.  
+2. Acesse Extensões (`Ctrl+Shift+X` / `Cmd+Shift+X`).  
+3. Pesquise por **CodeSentry** e clique em **Instalar**.
 
-1. Abra o Visual Studio Code.
-2. Vá para a aba de Extensões (`Ctrl+Shift+X` ou `Cmd+Shift+X` no macOS).
-3. Pesquise por `Nome da Extensão` e clique em instalar.
-
-### Instalação Manual
-
-1. Clone ou faça o download deste repositório.
-2. Na raiz do projeto, execute o comando:
-   ```bash
-   npm install
+## Uso
+1. Após instalada, clique no ícone CodeSentry na barra lateral.
+2. Em Configurações, instale (ou atualize) a CLI automaticamente.
+3. Em Projetos, adicione o caminho do diretório que deseja escanear.
+4. Clique no botão de Scan ao lado do projeto.
+5. Acompanhe o progresso no terminal integrado ou painel de status.
+6. Ao concluir, abra o relatório em PDF em Relatórios.
